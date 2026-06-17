@@ -182,6 +182,9 @@ def _fetch_keyword(keyword: str, seen: set[str], session: requests.Session) -> l
 
 
 def fetch() -> list[dict]:
+    from upload import detailed_urls
+
+    done = detailed_urls("BTIS")  # 이미 상세가 채워진 보고서 url (증분 스킵용)
     records: list[dict] = []
     seen: set[str] = set()
     session = requests.Session()
@@ -190,14 +193,15 @@ def fetch() -> list[dict]:
         print(f"[btis] '{keyword}': {len(found)}건")
         records.extend(found)
 
-    # 각 보고서 상세 조회로 인원·비용·기간·요약 보강
-    print(f"[btis] 상세 보강 {len(records)}건 …")
-    for i, rec in enumerate(records, 1):
+    # 증분: 이미 상세가 있는 보고서는 재조회 생략, 신규만 상세 보강.
+    todo = [r for r in records if r["url"] not in done]
+    print(f"[btis] 수집 {len(records)}건 중 신규 {len(todo)}건 상세 조회")
+    for i, rec in enumerate(todo, 1):
         _enrich(rec, session)
         if i % 50 == 0:
-            print(f"[btis]   상세 {i}/{len(records)}")
-    print(f"[btis] 총 {len(records)}건 (상세 포함)")
-    return records
+            print(f"[btis]   상세 {i}/{len(todo)}")
+    print(f"[btis] 상세 보강 {len(todo)}건 (기존 {len(records) - len(todo)}건 스킵)")
+    return todo
 
 
 if __name__ == "__main__":
