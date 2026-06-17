@@ -1,9 +1,9 @@
 name: collect
 
 on:
-  schedule:
-    - cron: "0 21 * * *" # 매일 06:00 KST (UTC 21:00)
-  workflow_dispatch: {} # 수동 실행 허용
+  # 자동 cron 비활성화: 미국 IP라 한국 정부사이트(BTIS/NABO/방통위) 접속 차단됨.
+  # 실제 자동수집은 로컬 launchd(한국 IP)에서 수행. 여기선 수동 실행만 유지.
+  workflow_dispatch: {}
 
 jobs:
   collect:
