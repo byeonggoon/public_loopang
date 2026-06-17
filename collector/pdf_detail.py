@@ -54,8 +54,11 @@ def _text(pdf_bytes: bytes) -> str:
     return re.sub(r"\s+", " ", " ".join(parts))
 
 
-def _iso(y: str, m: str, d: str) -> str:
-    return f"{int(y):04d}-{int(m):02d}-{int(d):02d}"
+def _iso(y: str, m: str, d: str) -> str | None:
+    yi, mi, di = int(y), int(m), int(d)
+    if not (1 <= mi <= 12 and 1 <= di <= 31):  # 일/월이 0 등 범위 밖이면 무효
+        return None
+    return f"{yi:04d}-{mi:02d}-{di:02d}"
 
 
 _TILDE = re.compile(r"[~∼〜～]")

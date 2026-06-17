@@ -82,7 +82,12 @@ def _won(text: str) -> int | None:
 
 def _ymd(text: str) -> str | None:
     s = re.sub(r"[^0-9]", "", text or "")
-    return f"{s[0:4]}-{s[4:6]}-{s[6:8]}" if len(s) >= 8 else None
+    if len(s) < 8:
+        return None
+    y, m, d = s[0:4], s[4:6], s[6:8]
+    if not (1 <= int(m) <= 12 and 1 <= int(d) <= 31):  # 일/월 0 등 무효 날짜 방지
+        return None
+    return f"{y}-{m}-{d}"
 
 
 def _parse_detail(html: str) -> dict:
