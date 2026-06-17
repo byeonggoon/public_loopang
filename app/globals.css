@@ -24,4 +24,32 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+  /* 픽셀아트 로고를 선명하게 */
+  .pixelated {
+    image-rendering: pixelated;
+  }
+}
+
+/* 로고 원숭이 — 평소엔 미세하게 둥실, 호버하면 신나게 까불기 */
+@keyframes monkey-bob {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-2px) rotate(-2deg); }
+}
+@keyframes monkey-wiggle {
+  0%, 100% { transform: rotate(-6deg) scale(1.08); }
+  25% { transform: rotate(6deg) scale(1.12); }
+  50% { transform: rotate(-4deg) scale(1.1); }
+  75% { transform: rotate(5deg) scale(1.12); }
+}
+.monkey-logo {
+  animation: monkey-bob 3s ease-in-out infinite;
+}
+.monkey-logo:hover {
+  animation: monkey-wiggle 0.5s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .monkey-logo,
+  .monkey-logo:hover {
+    animation: none;
+  }
 }
