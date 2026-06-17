@@ -1,0 +1,34 @@
+name: collect
+
+on:
+  schedule:
+    - cron: "0 21 * * *" # 매일 06:00 KST (UTC 21:00)
+  workflow_dispatch: {} # 수동 실행 허용
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deps
+        run: pip install -r collector/requirements.txt
+
+      - name: Run collector
+        working-directory: collector
+        env:
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
+          DATA_GO_KR_KEY: ${{ secrets.DATA_GO_KR_KEY }}
+          DATA_GO_KR_ENDPOINT: ${{ secrets.DATA_GO_KR_ENDPOINT }}
+          BTIS_MAX_PAGES: "5"
+          NABO_MAX_PAGES: "20"
+          NEC_MAX_PAGES: "10"
+          KCC_MAX_PAGES: "15"
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: python main.py
