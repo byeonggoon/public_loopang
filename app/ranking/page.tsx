@@ -34,7 +34,7 @@ function RankSection({
               {i + 1}
             </span>
             <div className="min-w-0 flex-1">
-              <a href={it.url} target="_blank" rel="noopener noreferrer" className="block truncate text-sm font-medium hover:underline">
+              <a href={it.url} target="_blank" rel="noopener noreferrer" className="line-clamp-2 text-sm font-medium hover:underline">
                 {it.title}
               </a>
               <span className="block truncate text-xs text-gray-400">{it.sub}</span>

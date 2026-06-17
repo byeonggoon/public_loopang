@@ -42,8 +42,10 @@ export default function AgenciesTable({ stats }: { stats: AgencyStat[] }) {
   const rows = sortStats(stats, sortKey, dir);
 
   return (
+    <>
+    <p className="mb-2 text-xs text-gray-400 sm:hidden">표를 좌우로 넘겨 비용·미공개율을 보세요 →</p>
     <div className="overflow-x-auto rounded-2xl border border-gray-200 dark:border-gray-800">
-      <table className="w-full text-sm">
+      <table className="w-full min-w-[640px] whitespace-nowrap text-sm">
         <thead className="bg-gray-50 text-xs text-gray-500 dark:bg-gray-900">
           <tr>
             {COLUMNS.map((c) => (
@@ -88,5 +90,6 @@ export default function AgenciesTable({ stats }: { stats: AgencyStat[] }) {
         </tbody>
       </table>
     </div>
+    </>
   );
 }

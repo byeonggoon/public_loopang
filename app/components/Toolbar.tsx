@@ -57,18 +57,20 @@ export default function Toolbar({ params }: { params: RecordQuery }) {
             className="h-12 w-full rounded-xl border border-gray-300 bg-white pl-11 pr-4 text-base text-gray-900 shadow-sm transition placeholder:text-gray-400 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/30 dark:border-gray-700 dark:bg-gray-950 dark:text-gray-100"
           />
         </div>
-        <button
-          type="submit"
-          className="inline-flex h-12 items-center justify-center gap-1.5 rounded-xl bg-blue-600 px-6 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40 active:scale-[0.98]"
-        >
-          검색
-        </button>
-        <a
-          href="/"
-          className="inline-flex h-12 items-center justify-center rounded-xl border border-gray-300 px-4 text-sm text-gray-600 transition hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
-        >
-          초기화
-        </a>
+        <div className="flex gap-2">
+          <button
+            type="submit"
+            className="inline-flex h-12 flex-1 items-center justify-center gap-1.5 rounded-xl bg-blue-600 px-6 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40 active:scale-[0.98] sm:flex-none"
+          >
+            검색
+          </button>
+          <a
+            href="/"
+            className="inline-flex h-12 items-center justify-center rounded-xl border border-gray-300 px-4 text-sm text-gray-600 transition hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+          >
+            초기화
+          </a>
+        </div>
       </div>
 
       {/* 필터 라인 */}
